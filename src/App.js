@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Greeting from "./components/Greet";
+import TopNav from "./components/TopNav";
 
 function App() {
+  const [username, setUsername] = useState("Default User");
+  const [password, setPassword] = useState("12345");
+
+  const [user, setUser] = useState({ username: "", password: "" });
+
+  console.log(user);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <TopNav username={username} />
+      <Greeting />
+      <input
+        defaultValue={username}
+        onChange={(event) => setUser({ ...user, username: event.target.value })}
+        type="text"
+        placeholder="username"
+      />
+      <input
+        onChange={(event) => setUser({ ...user, password: event.target.value })}
+        type="password"
+        placeholder="password"
+        defaultValue={password}
+      />
+
+      <button onClick={() => console.log(user)}>SUBMIT</button>
     </div>
   );
 }
